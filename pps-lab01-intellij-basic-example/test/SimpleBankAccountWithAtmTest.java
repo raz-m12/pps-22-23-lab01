@@ -52,9 +52,17 @@ public class SimpleBankAccountWithAtmTest {
                 () -> bankAccount.deposit(this.accountHolder.getId(), 0.5));
     }
 
+    @Test
+    void testWrongDeposit() {
+        bankAccount.deposit(accountHolder.getId(), 150);
+        bankAccount.deposit(2, 50);
+
+        assertEquals(149, bankAccount.getBalance());
+    }
+
 
     @Test
-    void testSuccessfulCashWithdrawal() {
+    void testSuccessfulCashWithdraw() {
         bankAccount.deposit(accountHolder.getId(), 150);
         bankAccount.withdraw(accountHolder.getId(), 50);
 

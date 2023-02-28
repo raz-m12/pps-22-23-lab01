@@ -1,5 +1,6 @@
 package lab01.example.model;
 
+import static lab01.example.model.Utils.checkUser;
 import static lab01.example.model.Utils.isWithdrawAllowed;
 
 /**
@@ -17,7 +18,7 @@ public class SimpleBankAccountWithAtm implements BankAccount {
 
     @Override
     public AccountHolder getHolder() {
-        return null;
+        return this.holder;
     }
 
     @Override
@@ -27,8 +28,10 @@ public class SimpleBankAccountWithAtm implements BankAccount {
 
     @Override
     public void deposit(int userID, double amount) {
-        this.balance += amount;
-        this.applyTransactionFee();
+        if(checkUser(this.getHolder(), userID)) {
+            this.balance += amount;
+            this.applyTransactionFee();
+        }
     }
 
     @Override
