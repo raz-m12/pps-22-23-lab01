@@ -6,10 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 /**
  * Backlog:
  * - initial balance equals 0 - Done
  * - test deposit including service fee - Done
+ * - transaction fee cannot be applied - Done
  * - deposit cash (withdrawing operation fee)
  * - withdraw valid amount
  * - withdraw invalid amount
@@ -30,7 +34,7 @@ public class SimpleBankAccountWithAtmTest {
 
     @Test
     void testInitialBalanceIsZero() {
-        Assertions.assertEquals(0, bankAccount.getBalance());
+        assertEquals(0, bankAccount.getBalance());
     }
 
     @Test
@@ -39,6 +43,23 @@ public class SimpleBankAccountWithAtmTest {
         bankAccount.deposit(accountHolder.getId(), 100);
 
         // Assert
-        Assertions.assertEquals(99, bankAccount.getBalance());
+        assertEquals(99, bankAccount.getBalance());
+    }
+
+    @Test
+    void testIncrementalDeposit() {
+        // Act
+        bankAccount.deposit(accountHolder.getId(), 100);
+        bankAccount.deposit(accountHolder.getId(), 50);
+
+        // Assert
+        assertEquals(148, bankAccount.getBalance());
+    }
+
+    @Disabled
+    void testTransactionFeeCannotBeApplied() {
+        // Assert
+        assertThrows(IllegalArgumentException.class,
+                () -> bankAccount.deposit(this.accountHolder.getId(), 0.5));
     }
 }
