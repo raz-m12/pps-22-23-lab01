@@ -1,24 +1,11 @@
 import lab01.example.model.AccountHolder;
 import lab01.example.model.BankAccount;
 import lab01.example.model.SimpleBankAccountWithAtm;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-/**
- * Backlog:
- * - initial balance equals 0 - Done
- * - test deposit including service fee - Done
- * - transaction fee cannot be applied - Done
- * - deposit to wrong account owner - done
- * - deposit cash (withdrawing operation fee)
- * - withdraw valid amount
- * - withdraw invalid amount
- */
 
 /**
  * The test suite for testing the SimpleBankAccountWithAtm implementation
@@ -59,9 +46,18 @@ public class SimpleBankAccountWithAtmTest {
     }
 
     @Test
-    void testCannotSubtractTransactionFee() {
+    void testCannotApplyTransactionFeeOnDeposit() {
         // Assert
         assertThrows(IllegalArgumentException.class,
                 () -> bankAccount.deposit(this.accountHolder.getId(), 0.5));
+    }
+
+
+    @Test
+    void testSuccessfulCashWithdrawal() {
+        bankAccount.deposit(accountHolder.getId(), 150);
+        bankAccount.withdraw(accountHolder.getId(), 50);
+
+        assertEquals(98, bankAccount.getBalance());
     }
 }
