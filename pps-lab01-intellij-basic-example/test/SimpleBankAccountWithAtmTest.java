@@ -56,8 +56,8 @@ public class SimpleBankAccountWithAtmTest {
         assertEquals(148, bankAccount.getBalance());
     }
 
-    @Disabled
-    void testTransactionFeeCannotBeApplied() {
+    @Test
+    void testCannotSubtractTransactionFee() {
         // Assert
         assertThrows(IllegalArgumentException.class,
                 () -> bankAccount.deposit(this.accountHolder.getId(), 0.5));
