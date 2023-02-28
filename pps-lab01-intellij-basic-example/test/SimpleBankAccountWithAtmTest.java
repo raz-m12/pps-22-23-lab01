@@ -77,4 +77,11 @@ public class SimpleBankAccountWithAtmTest {
         assertThrows(IllegalArgumentException.class,
                 () -> bankAccount.withdraw(this.accountHolder.getId(), 149));
     }
+
+    @Test
+    void testWrongWithdraw() {
+        bankAccount.deposit(accountHolder.getId(), 150);
+        bankAccount.withdraw(2, 100);
+        assertEquals(149, bankAccount.getBalance());
+    }
 }

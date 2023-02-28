@@ -36,7 +36,7 @@ public class SimpleBankAccountWithAtm implements BankAccount {
 
     @Override
     public void withdraw(int userID, double amount) {
-        if(isWithdrawAllowed(this.getBalance(), amount)) {
+        if(isWithdrawAllowed(this.getBalance(), amount) && checkUser(this.getHolder(), userID)) {
             this.balance -= amount;
             this.applyTransactionFee();
         }
