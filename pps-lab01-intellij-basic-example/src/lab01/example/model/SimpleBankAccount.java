@@ -1,5 +1,8 @@
 package lab01.example.model;
 
+import static lab01.example.model.Utils.checkUser;
+import static lab01.example.model.Utils.isWithdrawAllowed;
+
 /**
  * This class represent a particular instance of a BankAccount.
  * In particular, a Simple Bank Account allows always the deposit
@@ -26,35 +29,16 @@ public class SimpleBankAccount implements BankAccount {
 
     @Override
     public void deposit(final int userID, final double amount) {
-        if (checkUser(userID)) {
+        if (checkUser(this.holder, userID)) {
             this.balance += amount;
         }
     }
 
     @Override
     public void withdraw(final int userID, final double amount) {
-        if (checkUser(userID) && isWithdrawAllowed(amount)) {
+        if (checkUser(this.holder, userID) && isWithdrawAllowed(this.balance, amount)) {
             this.balance -= amount;
         }
     }
 
-    private boolean isWithdrawAllowed(final double amount){
-        return this.balance >= amount;
-    }
-
-    private boolean checkUser(final int id) {
-        return this.holder.getId() == id;
-    }
 }
-
-/*
-public class Utils {
-    public static boolean isWithdrawAllowed(double currentBalance, final double withdrawAmount){
-        return currentBalance >= withdrawAmount;
-    }
-
-    public static boolean checkUser(AccountHolder that, final int id) {
-        return that.getId() == id;
-    }
-}
- */

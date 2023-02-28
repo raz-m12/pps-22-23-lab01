@@ -1,5 +1,7 @@
 package lab01.example.model;
 
+import static lab01.example.model.Utils.isWithdrawAllowed;
+
 /**
  * This class represents an instance of a BankAccount.
  * In particular, a Simple Bank Account which allows to deposit cash via an Atm.
@@ -26,30 +28,26 @@ public class SimpleBankAccountWithAtm implements BankAccount {
     @Override
     public void deposit(int userID, double amount) {
         this.balance += amount;
-
-        if(!this.canSubtractTransactionFee()) {
-            throw new IllegalArgumentException("Transaction fee cannot be applied, balance less than 1");
-        }
-
         this.applyTransactionFee();
     }
 
     @Override
     public void withdraw(int userID, double amount) {
-        this.balance -= amount;
+        if(isWithdrawAllowed(this.getBalance(), amount)) {
+            this.balance -= amount;
+            this.applyTransactionFee();
+        }
+    }
 
+    private void applyTransactionFee() {
         if(!this.canSubtractTransactionFee()) {
             throw new IllegalArgumentException("Transaction fee cannot be applied, balance less than 1");
         }
 
-        this.applyTransactionFee();
+        this.balance--;
     }
 
     private boolean canSubtractTransactionFee() {
         return this.balance >= 1;
-    }
-
-    private void applyTransactionFee() {
-        this.balance--;
     }
 }

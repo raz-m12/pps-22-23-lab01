@@ -63,10 +63,10 @@ public class SimpleBankAccountWithAtmTest {
 
 
     @Test
-    void testUnsuccessfulCashWithdrawal() {
+    void testCannotApplyTransactionFeeOnWithdraw() {
         bankAccount.deposit(accountHolder.getId(), 150);
 
         assertThrows(IllegalArgumentException.class,
-                () -> bankAccount.withdraw(this.accountHolder.getId(), 500));
+                () -> bankAccount.withdraw(this.accountHolder.getId(), 149));
     }
 }
