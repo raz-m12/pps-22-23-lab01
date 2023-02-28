@@ -13,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class SimpleBankAccountWithAtmTest {
     private AccountHolder accountHolder;
     private BankAccount bankAccount;
+
+    private final int ANY_AMOUNT = 50;
+    private final int DEPOSIT_AMOUNT = 100;
+    private final int UNKNOWN_USER_ID = 2;
     @BeforeEach
     void beforeEach(){
         // Arrange
@@ -22,66 +26,61 @@ public class SimpleBankAccountWithAtmTest {
 
     @Test
     void testInitialBalanceIsZero() {
-        // Act
         assertEquals(0, bankAccount.getBalance());
     }
 
     @Test
     void testDeposit() {
-        // Act
-        bankAccount.deposit(accountHolder.getId(), 100);
+        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
 
-        // Assert
         assertEquals(99, bankAccount.getBalance());
     }
 
     @Test
-    void testIncrementalDeposit() {
-        // Act
-        bankAccount.deposit(accountHolder.getId(), 100);
+    void testDepositMultipleTimes() {
+        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
         bankAccount.deposit(accountHolder.getId(), 50);
 
-        // Assert
         assertEquals(148, bankAccount.getBalance());
     }
 
     @Test
-    void testCannotApplyTransactionFeeOnDeposit() {
-        // Assert
+    void testDepositCannotApplyTransactionFee() {
         assertThrows(IllegalArgumentException.class,
                 () -> bankAccount.deposit(this.accountHolder.getId(), 0.5));
     }
 
     @Test
-    void testWrongDeposit() {
-        bankAccount.deposit(accountHolder.getId(), 150);
-        bankAccount.deposit(2, 50);
+    void testDepositWrongId() {
+        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
+        bankAccount.deposit(UNKNOWN_USER_ID, ANY_AMOUNT);
 
-        assertEquals(149, bankAccount.getBalance());
+        assertEquals(99, bankAccount.getBalance());
     }
 
 
     @Test
-    void testSuccessfulCashWithdraw() {
-        bankAccount.deposit(accountHolder.getId(), 150);
+    void testWithdrawCash() {
+        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
         bankAccount.withdraw(accountHolder.getId(), 50);
 
-        assertEquals(98, bankAccount.getBalance());
+        assertEquals(48, bankAccount.getBalance());
     }
 
 
     @Test
-    void testCannotApplyTransactionFeeOnWithdraw() {
-        bankAccount.deposit(accountHolder.getId(), 150);
+    void testWithdrawCannotApplyTransactionFee() {
+        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
 
         assertThrows(IllegalArgumentException.class,
-                () -> bankAccount.withdraw(this.accountHolder.getId(), 149));
+                () -> bankAccount.withdraw(this.accountHolder.getId(), 99));
     }
 
     @Test
-    void testWrongWithdraw() {
-        bankAccount.deposit(accountHolder.getId(), 150);
-        bankAccount.withdraw(2, 100);
-        assertEquals(149, bankAccount.getBalance());
+    void testWithdrawWrongId() {
+        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
+        bankAccount.withdraw(UNKNOWN_USER_ID, ANY_AMOUNT);
+
+        assertEquals(99, bankAccount.getBalance());
     }
 }
