@@ -60,4 +60,13 @@ public class SimpleBankAccountWithAtmTest {
 
         assertEquals(98, bankAccount.getBalance());
     }
+
+
+    @Test
+    void testUnsuccessfulCashWithdrawal() {
+        bankAccount.deposit(accountHolder.getId(), 150);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> bankAccount.withdraw(this.accountHolder.getId(), 500));
+    }
 }

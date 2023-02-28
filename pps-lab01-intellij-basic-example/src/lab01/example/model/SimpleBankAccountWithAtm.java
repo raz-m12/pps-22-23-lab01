@@ -37,6 +37,11 @@ public class SimpleBankAccountWithAtm implements BankAccount {
     @Override
     public void withdraw(int userID, double amount) {
         this.balance -= amount;
+
+        if(!this.canSubtractTransactionFee()) {
+            throw new IllegalArgumentException("Transaction fee cannot be applied, balance less than 1");
+        }
+
         this.applyTransactionFee();
     }
 
