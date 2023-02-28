@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Backlog:
- * - initial balance equals 0
+ * - initial balance equals 0 - Done
+ * - test deposit including service fee - Done
  * - deposit cash (withdrawing operation fee)
  * - withdraw valid amount
  * - withdraw invalid amount
@@ -32,7 +33,7 @@ public class SimpleBankAccountWithAtmTest {
         Assertions.assertEquals(0, bankAccount.getBalance());
     }
 
-    @Disabled
+    @Test
     void testDeposit() {
         // Act
         bankAccount.deposit(accountHolder.getId(), 100);
