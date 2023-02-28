@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * - initial balance equals 0 - Done
  * - test deposit including service fee - Done
  * - transaction fee cannot be applied - Done
+ * - deposit to wrong account owner - done
  * - deposit cash (withdrawing operation fee)
  * - withdraw valid amount
  * - withdraw invalid amount
@@ -34,6 +35,7 @@ public class SimpleBankAccountWithAtmTest {
 
     @Test
     void testInitialBalanceIsZero() {
+        // Act
         assertEquals(0, bankAccount.getBalance());
     }
 

@@ -28,10 +28,10 @@ public class SimpleBankAccountWithAtm implements BankAccount {
         this.balance += amount;
 
         if(!this.canSubtractTransactionFee()) {
-            throw new IllegalArgumentException("Transaction fee cannot be applied: balance less than 1");
+            throw new IllegalArgumentException("Transaction fee cannot be applied, balance less than 1");
         }
 
-        this.balance--;
+        this.applyTransactionFee();
     }
 
     @Override
@@ -41,5 +41,9 @@ public class SimpleBankAccountWithAtm implements BankAccount {
 
     private boolean canSubtractTransactionFee() {
         return this.balance >= 1;
+    }
+
+    private void applyTransactionFee() {
+        this.balance--;
     }
 }
