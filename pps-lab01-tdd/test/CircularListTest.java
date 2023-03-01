@@ -60,4 +60,15 @@ public class CircularListTest {
         Assertions.assertEquals(2, list.previous().get());
     }
 
+
+    @Test
+    public void testResetToHead() {
+        list.add(1);
+        list.add(2);
+        list.next();
+        list.reset();
+
+        Assertions.assertEquals(1, list.next().get());
+    }
+    
 }
