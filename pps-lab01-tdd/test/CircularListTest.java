@@ -38,4 +38,10 @@ public class CircularListTest {
         Assertions.assertTrue(list.next().isEmpty());
     }
 
+    @Test
+    public void testNextRetrievesValue() {
+        list.add(1);
+        Assertions.assertEquals(1, list.next().get());
+    }
+
 }
