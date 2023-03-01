@@ -54,6 +54,7 @@ public class CircularListTest {
         list.add(1);
         list.add(2);
         list.add(3);
+
         Assertions.assertEquals(1, list.previous().get());
         Assertions.assertEquals(3, list.previous().get());
         Assertions.assertEquals(2, list.previous().get());

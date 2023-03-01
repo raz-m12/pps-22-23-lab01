@@ -27,24 +27,6 @@ public class SimpleCircularList implements CircularList{
         this.size++;
     }
 
-    private Node getTailOf(Node node) {
-        if(isNull(node.next))
-            return node;
-        else
-            return getTailOf(node.next);
-    }
-
-    private Node getHeadOf(Node node) {
-        if(isNull(node.prev))
-            return node;
-        else
-            return getHeadOf(node.prev);
-    }
-
-    private boolean isNull(Node node) {
-        return node == null;
-    }
-
     @Override
     public int size() {
         return this.size;
@@ -73,12 +55,29 @@ public class SimpleCircularList implements CircularList{
         return result;
     }
 
-    private Optional<Integer> getCurrentValue() {
-        return !isNull(this.current) ? Optional.of(this.current.value): Optional.empty();
-    }
-
     @Override
     public void reset() {
+        this.current = getHeadOf(this.current);
+    }
 
+    private Node getHeadOf(Node node) {
+        if(isNull(node.prev))
+            return node;
+        else
+            return getHeadOf(node.prev);
+    }
+
+    private Node getTailOf(Node node) {
+        if(isNull(node.next))
+            return node;
+        else
+            return getTailOf(node.next);
+    }
+
+    private boolean isNull(Node node) {
+        return node == null;
+    }
+    private Optional<Integer> getCurrentValue() {
+        return !isNull(this.current) ? Optional.of(this.current.value): Optional.empty();
     }
 }
