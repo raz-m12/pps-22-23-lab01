@@ -2,7 +2,6 @@ package lab01.tdd;
 
 import java.util.Optional;
 
-
 public class SimpleCircularList implements CircularList{
     private int size;
 

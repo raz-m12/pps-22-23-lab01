@@ -33,4 +33,9 @@ public class CircularListTest {
         Assertions.assertFalse(list.isEmpty());
     }
 
+    @Test
+    public void testNextOnEmptyList() {
+        Assertions.assertTrue(list.next().isEmpty());
+    }
+
 }
