@@ -20,17 +20,25 @@ public class SimpleCircularList implements CircularList{
         if(isNull(this.current)) {
             this.current = next;
         } else {
-            var endNode = getLastNodeOf(this.current);
+            var endNode = getTailOf(this.current);
+            next.prev = endNode;
             endNode.next = next;
         }
         this.size++;
     }
 
-    private Node getLastNodeOf(Node node) {
+    private Node getTailOf(Node node) {
         if(isNull(node.next))
             return node;
         else
-            return getLastNodeOf(node.next);
+            return getTailOf(node.next);
+    }
+
+    private Node getHeadOf(Node node) {
+        if(isNull(node.prev))
+            return node;
+        else
+            return getHeadOf(node.prev);
     }
 
     private boolean isNull(Node node) {
@@ -49,16 +57,24 @@ public class SimpleCircularList implements CircularList{
 
     @Override
     public Optional<Integer> next() {
-        Optional<Integer> result = current != null? Optional.of(this.current.value): Optional.empty();
+        Optional<Integer> result = getCurrentValue();
         if(!isNull(this.current))
-            this.current = this.current.next;
+            this.current = this.current.next == null? this.getHeadOf(this.current): this.current.next;
 
         return result;
     }
 
     @Override
     public Optional<Integer> previous() {
-        return Optional.empty();
+        Optional<Integer> result = getCurrentValue();
+        if(!isNull(this.current))
+            this.current = this.current.prev == null? this.getTailOf(this.current): this.current.prev;
+
+        return result;
+    }
+
+    private Optional<Integer> getCurrentValue() {
+        return !isNull(this.current) ? Optional.of(this.current.value): Optional.empty();
     }
 
     @Override
