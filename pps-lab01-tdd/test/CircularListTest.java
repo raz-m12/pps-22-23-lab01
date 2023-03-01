@@ -27,4 +27,10 @@ public class CircularListTest {
         Assertions.assertTrue(list.isEmpty());
     }
 
+    @Test
+    public void testIsNotEmpty() {
+        list.add(1);
+        Assertions.assertFalse(list.isEmpty());
+    }
+
 }
