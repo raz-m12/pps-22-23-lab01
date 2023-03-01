@@ -70,5 +70,13 @@ public class CircularListTest {
 
         Assertions.assertEquals(1, list.next().get());
     }
-    
+
+    @Test
+    public void testListSize() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        Assertions.assertEquals(3, list.size());
+    }
 }
