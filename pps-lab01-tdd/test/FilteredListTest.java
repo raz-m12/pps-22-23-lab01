@@ -40,4 +40,11 @@ public class FilteredListTest {
         Assertions.assertEquals(5, list.filteredNext(condition).get());
     }
 
+    @Test
+    public void testFilteredNextElementNotFound() {
+        list.add(4);
+
+        ListIntegerFinder condition = (a) -> a.value == 55;
+        Assertions.assertTrue(list.filteredNext(condition).isEmpty());
+    }
 }
