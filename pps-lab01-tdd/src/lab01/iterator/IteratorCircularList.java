@@ -35,7 +35,24 @@ public class IteratorCircularList implements IteratorList {
 
     @Override
     public Iterator<Integer> forwardIterator() {
-        return null;
+
+        return new Iterator<>() {
+
+            @Override
+            public boolean hasNext() {
+                return size != 0;
+            }
+
+            @Override
+            public Integer next() {
+                return null;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
     @Override

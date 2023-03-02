@@ -21,4 +21,11 @@ public class IteratorListTest {
         Assertions.assertEquals(1, list.size());
     }
 
+    @Test
+    public void testForwardIterationEmptyCollection() {
+        var it = list.forwardIterator();
+
+        Assertions.assertFalse(it.hasNext());
+    }
+
 }
