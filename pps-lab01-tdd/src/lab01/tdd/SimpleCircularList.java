@@ -41,7 +41,7 @@ public class SimpleCircularList implements CircularList{
     public Optional<Integer> next() {
         Optional<Integer> result = getCurrentValue();
         if(!isNull(this.current))
-            this.current = this.current.next == null? this.getHeadOf(this.current): this.current.next;
+            this.current = isNull(this.current.next)? this.getHeadOf(this.current): this.current.next;
 
         return result;
     }
@@ -50,7 +50,7 @@ public class SimpleCircularList implements CircularList{
     public Optional<Integer> previous() {
         Optional<Integer> result = getCurrentValue();
         if(!isNull(this.current))
-            this.current = this.current.prev == null? this.getTailOf(this.current): this.current.prev;
+            this.current = isNull(this.current.prev)? this.getTailOf(this.current): this.current.prev;
 
         return result;
     }
