@@ -1,15 +1,11 @@
 package lab01.tdd;
 
+import lab01.shared.Node;
+import static lab01.shared.Utils.*;
+
 import java.util.Optional;
 
-class Node {
-    Node(int val) {
-        value = val;
-    }
-    int value;
-    Node prev;
-    Node next;
-}
+
 public class SimpleCircularList implements CircularList{
     private int size;
     private Node current = null;
@@ -41,7 +37,7 @@ public class SimpleCircularList implements CircularList{
     public Optional<Integer> next() {
         Optional<Integer> result = getCurrentValue();
         if(!isNull(this.current))
-            this.current = isNull(this.current.next)? this.getHeadOf(this.current): this.current.next;
+            this.current = isNull(this.current.next)? getHeadOf(this.current): this.current.next;
 
         return result;
     }
@@ -50,7 +46,7 @@ public class SimpleCircularList implements CircularList{
     public Optional<Integer> previous() {
         Optional<Integer> result = getCurrentValue();
         if(!isNull(this.current))
-            this.current = isNull(this.current.prev)? this.getTailOf(this.current): this.current.prev;
+            this.current = isNull(this.current.prev)? getTailOf(this.current): this.current.prev;
 
         return result;
     }
@@ -58,24 +54,6 @@ public class SimpleCircularList implements CircularList{
     @Override
     public void reset() {
         this.current = getHeadOf(this.current);
-    }
-
-    private Node getHeadOf(Node node) {
-        if(isNull(node.prev))
-            return node;
-        else
-            return getHeadOf(node.prev);
-    }
-
-    private Node getTailOf(Node node) {
-        if(isNull(node.next))
-            return node;
-        else
-            return getTailOf(node.next);
-    }
-
-    private boolean isNull(Node node) {
-        return node == null;
     }
     private Optional<Integer> getCurrentValue() {
         return !isNull(this.current) ? Optional.of(this.current.value): Optional.empty();
