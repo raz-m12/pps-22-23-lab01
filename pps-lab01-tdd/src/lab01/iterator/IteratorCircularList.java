@@ -45,7 +45,9 @@ public class IteratorCircularList implements IteratorList {
 
             @Override
             public Integer next() {
-                return null;
+                var old = current;
+                current = isNull(current.next)? getHeadOf(current): current.next;
+                return old.value;
             }
 
             @Override

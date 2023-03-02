@@ -4,15 +4,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 /**
  * The test suite for testing the IteratorList implementation
  */
 public class IteratorListTest {
     private IteratorList list;
+    private Iterator<Integer> forwardIterator;
 
     @BeforeEach
     void beforeEach(){
         list = new IteratorCircularList();
+        forwardIterator = list.forwardIterator();
     }
 
     @Test
@@ -23,9 +27,17 @@ public class IteratorListTest {
 
     @Test
     public void testForwardIterationEmptyCollection() {
-        var it = list.forwardIterator();
+        Assertions.assertFalse(forwardIterator.hasNext());
+    }
 
-        Assertions.assertFalse(it.hasNext());
+    @Test
+    public void testForwardIteration() {
+        list.add(4);
+        list.add(5);
+
+        Assertions.assertEquals(4, forwardIterator.next());
+        Assertions.assertEquals(5, forwardIterator.next());
+        Assertions.assertEquals(4, forwardIterator.next());
     }
 
 }
