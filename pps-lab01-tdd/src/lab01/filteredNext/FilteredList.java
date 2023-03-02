@@ -1,14 +1,16 @@
-package lab01.iterator;
+package lab01.filteredNext;
 
 import java.util.Iterator;
+import java.util.Optional;
+
 
 /**
- * TODO to update
+ * TODO update description
  * Represents a list of integers, with a built-in iterator that is bidirectional and circular.
  * Example: with a list like {1,2,3}, the first call of next() returns 1, the second call returns 2,
  * the third returns 3, the fourth returns 1, and so on. Call to previous() goes in the other way.
  */
-public interface IteratorList {
+public interface FilteredList {
     /**
      * Adds an element to the list, namely, after the last inserted one.
      * @param element the element to be added to the list
@@ -28,14 +30,9 @@ public interface IteratorList {
     boolean isEmpty();
 
     /**
-     * Provides a way of forward iterating over the elements of the list.
-     * @return an iterator enabling forward iteration of the list.
+     * Provides a way of searching over the elements of the list.
+     * @return the first element in the list that satisfies the given condition.
      */
-    Iterator<Integer> forwardIterator();
+    Optional<Integer> filteredNext(ListIntegerFinder condition);
 
-    /**
-     * Provides a way of backward iterating over the elements of the list.
-     * @return an iterator enabling backward iteration of the list.
-     */
-    Iterator<Integer> backwardIterator();
 }
