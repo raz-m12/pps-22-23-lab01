@@ -3,10 +3,11 @@ package lab01.iterator;
 import java.util.Iterator;
 
 /**
- * TODO to update
- * Represents a list of integers, with a built-in iterator that is bidirectional and circular.
- * Example: with a list like {1,2,3}, the first call of next() returns 1, the second call returns 2,
- * the third returns 3, the fourth returns 1, and so on. Call to previous() goes in the other way.
+ * Represents a list of integers. Provides two ways of iterating over the list.
+ * Forward and backward iterators permit iteration in both directions. Both are circular.
+ * Example: suppose forward iterator is used with a list like {1,2,3}.
+ * The first call of next() returns 1, the second call returns 2, the third returns 3, the fourth returns 1, and so on.
+ * Backward iterator is similar but works in the opposite direction.
  */
 public interface IteratorList {
     /**
@@ -14,18 +15,6 @@ public interface IteratorList {
      * @param element the element to be added to the list
      */
     void add(final int element);
-
-    /**
-     * Provides the current size of the list
-     * @return the size of the list
-     */
-    int size();
-
-    /**
-     * Checks if the list is empty
-     * @return true if the list is empty, false otherwise
-     */
-    boolean isEmpty();
 
     /**
      * Provides a way of forward iterating over the elements of the list.

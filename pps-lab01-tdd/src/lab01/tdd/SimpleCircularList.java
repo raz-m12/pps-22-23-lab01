@@ -55,6 +55,7 @@ public class SimpleCircularList implements CircularList{
     public void reset() {
         this.current = getHeadOf(this.current);
     }
+
     private Optional<Integer> getCurrentValue() {
         return !isNull(this.current) ? Optional.of(this.current.value): Optional.empty();
     }

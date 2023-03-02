@@ -22,12 +22,6 @@ public class IteratorListTest {
     }
 
     @Test
-    public void testAddElement() {
-        list.add(1);
-        Assertions.assertEquals(1, list.size());
-    }
-
-    @Test
     public void testForwardIterationEmptyCollection() {
         Assertions.assertFalse(forwardIterator.hasNext());
     }

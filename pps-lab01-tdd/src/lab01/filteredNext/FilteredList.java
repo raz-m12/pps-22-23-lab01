@@ -4,10 +4,11 @@ import java.util.Optional;
 
 
 /**
- * TODO update description
- * Represents a list of integers, with a built-in iterator that is bidirectional and circular.
- * Example: with a list like {1,2,3}, the first call of next() returns 1, the second call returns 2,
- * the third returns 3, the fourth returns 1, and so on. Call to previous() goes in the other way.
+ * Represents a list of integers, with the ability to search over the list and find the next element which satisfies
+ * a given condition. In case the end of the list is reached, the search continues from the beginning of the list.
+ * Example: with a list like {1,2,3}, searching for element 1, retrieves the first element in the list.
+ * Searching for the value 3 the third element is returned. Searching for 2, the end of the list is reached and
+ * the search continues from the beginning eventually returning the matched element.
  */
 public interface FilteredList {
     /**

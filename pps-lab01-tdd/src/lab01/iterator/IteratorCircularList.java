@@ -24,16 +24,6 @@ public class IteratorCircularList implements IteratorList {
     }
 
     @Override
-    public int size() {
-        return this.size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.size == 0;
-    }
-
-    @Override
     public Iterator<Integer> forwardIterator() {
         return new Iterator<>() {
 
