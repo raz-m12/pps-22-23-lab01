@@ -35,7 +35,6 @@ public class IteratorCircularList implements IteratorList {
 
     @Override
     public Iterator<Integer> forwardIterator() {
-
         return new Iterator<>() {
 
             @Override
@@ -59,6 +58,24 @@ public class IteratorCircularList implements IteratorList {
 
     @Override
     public Iterator<Integer> backwardIterator() {
-        return null;
+        return new Iterator<>() {
+
+            @Override
+            public boolean hasNext() {
+                return size != 0;
+            }
+
+            @Override
+            public Integer next() {
+                var old = current;
+                current = isNull(current.prev)? getTailOf(current): current.prev;
+                return old.value;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 }
