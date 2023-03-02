@@ -4,8 +4,7 @@ import lab01.shared.Node;
 
 import java.util.Optional;
 
-import static lab01.shared.Utils.getTailOf;
-import static lab01.shared.Utils.isNull;
+import static lab01.shared.Utils.*;
 
 public class SimpleFilteredList implements FilteredList {
 
@@ -25,17 +24,19 @@ public class SimpleFilteredList implements FilteredList {
     }
 
     @Override
-    public int size() {
-        return this.size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.size == 0;
-    }
-
-    @Override
     public Optional<Integer> filteredNext(ListIntegerFinder condition) {
+
+        if(isNull(current)) return Optional.empty();
+
+        var startNode = current;
+        do {
+            if(condition.satisfies(current)) {
+                return Optional.of(current.value);
+            }
+            else {
+                current = isNull(current.next) ? getHeadOf(current): current.next;
+            }
+        } while(current != startNode);
         return Optional.empty();
     }
 }
