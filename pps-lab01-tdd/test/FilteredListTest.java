@@ -21,10 +21,23 @@ public class FilteredListTest {
     }
 
     @Test
-    public void testFilteredNextFindsInsertedValue() {
+    public void testFilteredNextFindsInsertedValues() {
         list.add(4);
+        list.add(5);
+        list.add(2);
+        list.add(6);
 
         ListIntegerFinder condition = (a) -> a.value == 4;
         Assertions.assertEquals(4, list.filteredNext(condition).get());
+
+        condition = (a) -> a.value == 2;
+        Assertions.assertEquals(2, list.filteredNext(condition).get());
+
+        condition = (a) -> a.value == 6;
+        Assertions.assertEquals(6, list.filteredNext(condition).get());
+
+        condition = (a) -> a.value == 5;
+        Assertions.assertEquals(5, list.filteredNext(condition).get());
     }
+
 }
